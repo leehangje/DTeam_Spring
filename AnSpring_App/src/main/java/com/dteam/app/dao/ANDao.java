@@ -21,8 +21,8 @@ public class ANDao {
 	public ANDao() {
 		try {
 			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:/comp/env/team01");
-			/* dataSource = (DataSource) context.lookup("java:/comp/env/dteam"); */
+			/* dataSource = (DataSource) context.lookup("java:/comp/env/team01"); */
+			 dataSource = (DataSource) context.lookup("java:/comp/env/dteam"); 
 			/*dataSource = (DataSource) context.lookup("java:/comp/env/CSS");*/
 		} catch (NamingException e) {
 			e.getMessage();
