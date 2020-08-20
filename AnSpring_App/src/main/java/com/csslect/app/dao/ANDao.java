@@ -30,7 +30,7 @@ public class ANDao {
 
 	}
 	
-    public MemberDTO anLogin(String idin, String passwdin) {
+    public MemberDTO anLogin(String idin, String passwdin) {	
 
     	MemberDTO adto = null;
 		Connection connection = null;
