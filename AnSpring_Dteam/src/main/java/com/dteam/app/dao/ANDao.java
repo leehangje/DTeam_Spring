@@ -10,9 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import com.dteam.app.dto.MemberDto;
 
-import com.csslect.app.dto.ANDto;
-import com.csslect.app.dto.MemberDTO;
 
 public class ANDao {
 
@@ -30,31 +29,39 @@ public class ANDao {
 
 	}
 	
-    public MemberDTO anLogin(String idin, String passwdin) {
+	
+    public MemberDto anLogin(String id, String pw) {
 
-    	MemberDTO adto = null;
+    	MemberDto adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;		
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "select * "					
-							+ " from member" 
-							+ " where id = '" + idin + "' and passwd = '" + passwdin + "' ";
-			prepareStatement = connection.prepareStatement(query);
+			String sql = "select * "					
+							+ " from tblmember" 
+							+ " where member_id = '" + id + "' and member_pw = '" + pw + "' ";
+			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
 			
 			while (resultSet.next()) {
-				String id = resultSet.getString("id");
-				String name = resultSet.getString("name");
-				String phonenumber = resultSet.getString("phonenumber");
-				String address = resultSet.getString("address"); 
+				String member_id = resultSet.getString("member_id");
+				String member_pw = resultSet.getString("member_pw");
+				String member_nickname = resultSet.getString("member_nickname");
+				String member_tel = resultSet.getString("member_tel"); 
+				String member_addr = resultSet.getString("member_addr");
+				String member_latitude = resultSet.getString("member_latitude");
+				String member_longitude = resultSet.getString("member_longitude");
+				int member_grade = resultSet.getInt("member_grade");
+				//int member_grade = Integer.parseInt(resultSet.getString("member_grade")); 
+				String member_name = resultSet.getString("member_name"); 
 
-				adto = new MemberDTO(id, name, phonenumber, address);							
+				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, 
+								     member_latitude, member_longitude, member_grade, member_name);							
 			}	
 			
-			System.out.println("MemberDTO id : " + adto.getId());
+			System.out.println("MemberDTO id : " + adto.getMember_id());
 			
 		} catch (Exception e) {
 			
@@ -82,9 +89,10 @@ public class ANDao {
 		return adto;
 
 	}
-    
-    public int anJoin(String id, String passwd, String name, 
-    							String phonenumber, String address) { 
+
+    public int anJoin(String member_id, String member_pw, String member_nickname, 
+    				  String member_tel, String member_addr, String member_latitude, 
+    				  String member_longitude, String member_name) { 
     	
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -92,10 +100,12 @@ public class ANDao {
 		
 		try {
 			connection = dataSource.getConnection();
-			String query = "insert into member(id, passwd, name, phonenumber, address) " + 
-			               "values('" + id + "', '" + passwd + "', '" + name + "', '" + 
-					        			phonenumber + "', '" + address + "' )";
-			prepareStatement = connection.prepareStatement(query);
+			String sql = "insert into tblmember(member_id, member_pw, member_nickname, member_tel, " + 
+						  "member_addr, member_latitude, member_longitude, member_name) " + 
+			               "values('" + member_id + "', '" + member_pw + "', '" + member_nickname + "', '" + 
+			               member_tel + "', '" + member_addr + "', '" + member_latitude + "', '" + 
+			               member_longitude + "', '" + member_name + "' )";
+			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
 			
 			if (state > 0) {
@@ -123,9 +133,9 @@ public class ANDao {
 		}
 
 		return state;
-
 	}
 
+    /*
 	public ArrayList<ANDto> anSelectMulti() {		
 		
 		ArrayList<ANDto> adtos = new ArrayList<ANDto>();
@@ -179,8 +189,9 @@ public class ANDao {
 		return adtos;
 
 	}
-	
-	
+	*/
+    
+	/*
 	public int anInsertMulti(int id, String name, String date, String dbImgPath) {
 		
 		Connection connection = null;
@@ -227,8 +238,8 @@ public class ANDao {
 		return state;
 
 	}
-	
-
+	*/
+    /*
 	public int anUpdateMulti(int id, String name, String date, String dbImgPath) {
 		
 		Connection connection = null;
@@ -280,7 +291,8 @@ public class ANDao {
 		return state;
 	
 	}
-	
+	*/
+    /*
 	public int anUpdateMultiNo(int id, String name, String date) {
 		
 		Connection connection = null;
@@ -330,7 +342,8 @@ public class ANDao {
 	
 		return state;
 	}
-	
+	*/
+    /*
 	public int anDeleteMulti(int id) {
 		
 		Connection connection = null;
@@ -376,7 +389,7 @@ public class ANDao {
 		return state;
 
 	}
-
+	*/
 		
 	
 	
