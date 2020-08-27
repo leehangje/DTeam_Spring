@@ -2530,3 +2530,66 @@ java.lang.IllegalArgumentException: Cannot set lower sequence number for root (p
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 >>>>>>> 02496e529a1e472d4758c6d2196ec33c9fd591df
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:25.964
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:25.964
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@4e7bf371[org.springframework.tooling.boot.ls:1.20.0.202007271426(id=720)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:26.011
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:26.104
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.693
+!MESSAGE Boot LS startup time from start to initialized: 5620ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.927
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.oBlnGJRtisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.927
+!MESSAGE Creating project sorter...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.927
+!MESSAGE Creating project sorter... DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.927
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.943
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.943
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.943
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.oBlnGJRt => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.943
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.943
+!MESSAGE classpath=77 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.958
+!MESSAGE buffering callback sts4.classpath.oBlnGJRt AnSpring_App false 77
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:31.958
+!MESSAGE executing callback sts4.classpath.oBlnGJRt 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:18:32.005
+!MESSAGE executing callback sts4.classpath.oBlnGJRt SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:19:03.192
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oBlnGJRt
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:19:03.192
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.oBlnGJRt
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:19:03.192
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-08-27 18:19:03.192
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.oBlnGJRt => OK
