@@ -1,4 +1,4 @@
-<%@page import="com.csslect.app.dto.MemberDTO"%>
+<%@page import="com.dteam.app.dto.MemberDto"%>
 
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.google.gson.JsonObject"%>
@@ -13,7 +13,7 @@
 
 <%		
 	Gson gson = new Gson();
-	String json = gson.toJson((MemberDTO)request.getAttribute("anLogin"));
+	String json = gson.toJson((MemberDto)request.getAttribute("anLogin"));
 	
 	out.println(json);	
 

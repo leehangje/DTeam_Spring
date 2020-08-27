@@ -1,4 +1,4 @@
-<%@page import="com.csslect.app.dto.MemberDTO"%>
+<%@page import="com.dteam.app.dto.MemberDto"%>
 
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.google.gson.JsonObject"%>
