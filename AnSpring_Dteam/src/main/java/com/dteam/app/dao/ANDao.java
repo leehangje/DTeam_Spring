@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.dteam.app.dto.MdDto;
 import com.dteam.app.dto.MemberDto;
 
 
@@ -134,6 +136,70 @@ public class ANDao {
 
 		return state;
 	}
+
+
+    
+	public MdDto anDetail(String md_serial_number) {
+		
+		MdDto mdDto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "
+						+ "from tblmerchandise "
+						+ "where md_serial_number ='"+md_serial_number+"'";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String md_name = resultSet.getString("md_name");
+				String md_category = resultSet.getString("md_category");
+				int md_price = resultSet.getInt("md_price");
+				String md_rental_term = resultSet.getString("md_rental_term");
+				int md_deposit = resultSet.getInt("md_deposit");
+				String md_detail_content = resultSet.getString("md_detail_content");
+				String md_photo_url = resultSet.getString("md_photo_url");
+				String member_id = resultSet.getString("member_id");
+				String member_addr = resultSet.getString("member_addr");
+				int md_fav_count = resultSet.getInt("md_fav_count");
+				String md_registration_date = resultSet.getString("md_registration_date");
+				md_serial_number = resultSet.getString("md_serial_number");
+				int md_rent_status = resultSet.getInt("md_rent_status");
+				int md_hits = resultSet.getInt("md_hits");
+				
+				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit,
+						md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, 
+						md_registration_date, md_serial_number, md_rent_status, md_hits);
+			}
+			System.out.println("md_serial_number : " + mdDto.getMd_serial_number());
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		return mdDto;
+	}
+
+
+	
 
     /*
 	public ArrayList<ANDto> anSelectMulti() {		
