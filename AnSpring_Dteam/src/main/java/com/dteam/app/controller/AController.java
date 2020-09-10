@@ -24,8 +24,10 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.dteam.app.command.ACommand;
 import com.dteam.app.command.ADetailCommand;
+import com.dteam.app.command.AIdCheckCommand;
 import com.dteam.app.command.AJoinCommand;
 import com.dteam.app.command.ALoginCommand;
+import com.dteam.app.command.ANickNameCheckCommand;
 
 @Controller
 public class AController {
@@ -99,6 +101,50 @@ public class AController {
 		
 		return "anJoin";
 	}
+	
+	@RequestMapping(value="/anIdCheck", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anIdCheck(HttpServletRequest request, Model model) {
+		System.out.println("anIdCheck()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String member_id = (String) request.getParameter("member_id");
+		
+		System.out.println(member_id);
+		
+		model.addAttribute("member_id", member_id);
+		
+		command = new AIdCheckCommand();
+		command.execute(model);
+		
+		return "anIdCheck";
+	} //anIdCheck()
+	
+	@RequestMapping(value="/anNickNameCheck", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anNickNameCheck(HttpServletRequest request, Model model) {
+		System.out.println("anNickNameCheck()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String member_nickname = (String) request.getParameter("member_nickname");
+		
+		System.out.println(member_nickname);
+		
+		model.addAttribute("member_nickname", member_nickname);
+		
+		command = new ANickNameCheckCommand();
+		command.execute(model);
+		
+		return "anNickNameCheck";
+	} //anIdCheck()
 	
 	
 	@RequestMapping(value="/anDetail", method = {RequestMethod.GET, RequestMethod.POST} )

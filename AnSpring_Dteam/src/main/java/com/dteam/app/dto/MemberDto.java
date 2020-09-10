@@ -30,6 +30,7 @@ public class MemberDto {
 
     
     // 암호 없이 멤버 정보를 가져올 때
+    // 이메일 중복체크할 때
     public MemberDto(String member_id, String member_nickname,
                      String member_tel, String member_addr, String member_latitude,
                      String member_longitude, int member_grade, String member_name) {
@@ -42,6 +43,13 @@ public class MemberDto {
         this.member_grade = member_grade;
         this.member_name = member_name;
     }
+    
+    // 닉네임 중복체크할 때
+	public MemberDto(String member_nickname) {
+		super();
+		this.member_nickname = member_nickname;
+	}
+
 
 	public String getMember_id() {
         return member_id;

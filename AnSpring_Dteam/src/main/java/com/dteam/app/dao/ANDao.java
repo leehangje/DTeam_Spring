@@ -136,7 +136,100 @@ public class ANDao {
 
 		return state;
 	}
+    
+    public MemberDto anIdCheck(String member_id) {
+		MemberDto adto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "					
+							+ " from tblmember" 
+							+ " where member_id = '" + member_id + "' ";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				member_id = resultSet.getString("member_id");
+				String member_nickname = resultSet.getString("member_nickname");
+				String member_tel = resultSet.getString("member_tel"); 
+				String member_addr = resultSet.getString("member_addr");
+				String member_latitude = resultSet.getString("member_latitude");
+				String member_longitude = resultSet.getString("member_longitude");
+				int member_grade = resultSet.getInt("member_grade");
+				String member_name = resultSet.getString("member_name"); 
 
+				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, 
+								     member_latitude, member_longitude, member_grade, member_name);							
+			}	
+				
+				System.out.println("MemberDTO id : " + adto.getMember_id());
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		
+		return adto;
+	} //anIdCheck()
+    
+	public MemberDto anNickNameCheck(String member_nickname) {
+		MemberDto adto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "					
+							+ " from tblmember" 
+							+ " where member_nickname = '" + member_nickname + "' ";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				member_nickname = resultSet.getString("member_nickname"); 
+
+				adto = new MemberDto(member_nickname);							
+			}	
+				
+				System.out.println("MemberDTO nickname : " + adto.getMember_nickname());
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		
+		return adto;
+	} //anNickNameCheck()
 
     
 	public MdDto anDetail(String md_serial_number) {
@@ -197,6 +290,8 @@ public class ANDao {
 		}
 		return mdDto;
 	}
+
+
 
 
 	
