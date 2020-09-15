@@ -27,6 +27,7 @@ import com.dteam.app.command.ADetailCommand;
 import com.dteam.app.command.AIdCheckCommand;
 import com.dteam.app.command.AJoinCommand;
 import com.dteam.app.command.ALoginCommand;
+import com.dteam.app.command.AMainSelectCommand;
 import com.dteam.app.command.ANickNameCheckCommand;
 
 @Controller
@@ -146,6 +147,24 @@ public class AController {
 		return "anNickNameCheck";
 	} //anIdCheck()
 	
+	
+	@RequestMapping(value="/anMainSelect", method = {RequestMethod.GET, RequestMethod.POST} )
+	public String anMainSelect(HttpServletRequest request, Model model) {
+		System.out.println("anMainSelect()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 	
+		
+		command = new AMainSelectCommand();
+		
+		command.execute(model);
+		
+		return "anMainSelect";
+	}
+
 	
 	@RequestMapping(value="/anDetail", method = {RequestMethod.GET, RequestMethod.POST} )
 	public String anDetail(HttpServletRequest request, Model model) {

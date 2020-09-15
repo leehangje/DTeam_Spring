@@ -17,7 +17,6 @@
 				<li><a href="list.bo" ${category eq 'bo' ? 'class="active"' : ''}>메뉴2</a></li>
 				<li><a href="list.da" ${category eq 'da' ? 'class="active"' : ''}>메뉴3</a></li> --%>
 				<li><a href="#">서비스 소개</a></li>
-				<li><a href="#">상품 등록</a></li>
 				<li><a href="#">카테고리</a></li>
 				<li><a href="#">공지사항</a></li>
 				<li><a href="#">마이페이지</a></li>
