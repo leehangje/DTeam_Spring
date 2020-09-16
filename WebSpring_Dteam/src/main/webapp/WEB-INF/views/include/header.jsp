@@ -8,19 +8,8 @@
 			<div class="member_menu">
 				<a href="#" class="login">로그인</a>
 				<a href="#">회원가입</a>
+				<a href="#">마이페이지</a>
 			</div>
-		</div>
-		<div class="gnb_item">		
-			<ul>
-				<%-- <li><a href="list.me" ${category eq 'me' ? 'class="active"' : ''}>마이페이지</a></li>
-				<li><a href="list.no" ${category eq 'no' ? 'class="active"' : ''}>메뉴1</a></li>
-				<li><a href="list.bo" ${category eq 'bo' ? 'class="active"' : ''}>메뉴2</a></li>
-				<li><a href="list.da" ${category eq 'da' ? 'class="active"' : ''}>메뉴3</a></li> --%>
-				<li><a href="#">서비스 소개</a></li>
-				<li><a href="#">카테고리</a></li>
-				<li><a href="#">공지사항</a></li>
-				<li><a href="#">마이페이지</a></li>
-			</ul>
 		</div>
 	</div>
 </header>

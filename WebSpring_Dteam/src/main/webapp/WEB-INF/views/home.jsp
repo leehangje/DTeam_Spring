@@ -27,9 +27,6 @@
      
 </head>
 <body>
-<!-- header -->
-<jsp:include page="/WEB-INF/views/include/header.jsp"/>
-   
    <!-- 슬라이드 배너 -->
    <!-- 상품 리스트 -->
    <div id="content">
@@ -99,8 +96,5 @@
    	  	</ul>
       </div>
    </div>
-   
-<!-- footer -->   
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 </body>
 </html>
