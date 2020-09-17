@@ -4175,3 +4175,18 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.jdt.internal.corext.ref
 	at org.eclipse.osgi.internal.loader.ModuleClassLoader.loadClass(ModuleClassLoader.java:171)
 	at java.lang.ClassLoader.loadClass(Unknown Source)
 	... 51 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-09-17 23:28:47.298
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.jcUSAaEA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-09-17 23:28:47.303
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.jcUSAaEA
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-09-17 23:28:47.308
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-09-17 23:28:47.313
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.jcUSAaEA => OK
+
+!ENTRY org.eclipse.core.resources 2 10035 2020-09-17 23:28:53.925
+!MESSAGE The workspace will exit with unsaved changes in this session.
