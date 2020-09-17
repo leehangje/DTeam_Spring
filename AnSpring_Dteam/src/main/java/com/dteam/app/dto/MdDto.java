@@ -3,23 +3,23 @@ package com.dteam.app.dto;
 public class MdDto {
 	String md_name;
 	String md_category;
-	int md_price;
+	String md_price;
 	String md_rental_term;
-	int md_deposit;
+	String md_deposit;
 	String md_detail_content;
 	String md_photo_url;
 	String member_id;
 	String member_addr;
-	int md_fav_count;
+	String md_fav_count;
 	String md_registration_date;
 	String md_serial_number;
-	int md_rent_status;
-	int md_hits;
+	String md_rent_status;
+	String md_hits;
 	
 	
-	public MdDto(String md_name, String md_category, int md_price, String md_rental_term, int md_deposit,
-			String md_detail_content, String md_photo_url, String member_id, String member_addr, int md_fav_count,
-			String md_registration_date, String md_serial_number, int md_rent_status, int md_hits) {
+	public MdDto(String md_name, String md_category, String md_price, String md_rental_term, String md_deposit,
+			String md_detail_content, String md_photo_url, String member_id, String member_addr, String md_fav_count,
+			String md_registration_date, String md_serial_number, String md_rent_status, String md_hits) {
 		super();
 		this.md_name = md_name;
 		this.md_category = md_category;
@@ -58,12 +58,12 @@ public class MdDto {
 	}
 
 
-	public int getMd_price() {
+	public String getMd_price() {
 		return md_price;
 	}
 
 
-	public void setMd_price(int md_price) {
+	public void setMd_price(String md_price) {
 		this.md_price = md_price;
 	}
 
@@ -78,12 +78,12 @@ public class MdDto {
 	}
 
 
-	public int getMd_deposit() {
+	public String getMd_deposit() {
 		return md_deposit;
 	}
 
 
-	public void setMd_deposit(int md_deposit) {
+	public void setMd_deposit(String md_deposit) {
 		this.md_deposit = md_deposit;
 	}
 
@@ -128,12 +128,12 @@ public class MdDto {
 	}
 
 
-	public int getMd_fav_count() {
+	public String getMd_fav_count() {
 		return md_fav_count;
 	}
 
 
-	public void setMd_fav_count(int md_fav_count) {
+	public void setMd_fav_count(String md_fav_count) {
 		this.md_fav_count = md_fav_count;
 	}
 
@@ -158,22 +158,22 @@ public class MdDto {
 	}
 
 
-	public int getMd_rent_status() {
+	public String getMd_rent_status() {
 		return md_rent_status;
 	}
 
 
-	public void setMd_rent_status(int md_rent_status) {
+	public void setMd_rent_status(String md_rent_status) {
 		this.md_rent_status = md_rent_status;
 	}
 
 
-	public int getMd_hits() {
+	public String getMd_hits() {
 		return md_hits;
 	}
 
 
-	public void setMd_hits(int md_hits) {
+	public void setMd_hits(String md_hits) {
 		this.md_hits = md_hits;
 	}
 	

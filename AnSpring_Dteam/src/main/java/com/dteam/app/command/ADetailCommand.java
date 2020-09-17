@@ -22,7 +22,10 @@ public class ADetailCommand implements ACommand{
 		 //String md_detail_content = (String)model.asMap().get("md_detail_content");
 		 //int md_serial_number = (Integer)model.asMap().get("md_serial_number");
 		
-		 String md_serial_number = (String) model.asMap().get("md_serial_number");
+		String md_serial_number = (String) model.asMap().get("md_serial_number");
+		
+		System.out.println("md_serial_number : " + md_serial_number );
+		
 		
 		ANDao adao = new ANDao();
 		
