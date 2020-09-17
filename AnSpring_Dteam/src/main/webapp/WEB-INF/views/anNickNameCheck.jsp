@@ -15,7 +15,7 @@ String json = gson.toJson((MemberDto)request.getAttribute("anNickNameCheck"));
 MemberDto dto = (MemberDto)request.getAttribute("anNickNameCheck");
 
 if(dto != null) {
-	out.println(dto.getMember_nickname() + "은 사용 불가능한 닉네임입니다.");
+	//out.println(dto.getMember_nickname() + "은 사용 불가능한 닉네임입니다.");
 	out.println(json);
 } else {
 	out.println("사용 가능한 닉네임입니다.");	

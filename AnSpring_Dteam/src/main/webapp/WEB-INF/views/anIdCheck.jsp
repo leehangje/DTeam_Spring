@@ -15,7 +15,7 @@ String json = gson.toJson((MemberDto)request.getAttribute("anIdCheck"));
 MemberDto dto = (MemberDto)request.getAttribute("anIdCheck");
 
 if(dto != null) {
-	out.println(dto.getMember_id() + "은 사용 불가능한 아이디입니다.");
+	//out.println(dto.getMember_id() + "은 사용 불가능한 아이디입니다.");
 	out.println(json);
 } else {
 	out.println("사용 가능한 아이디입니다.");	
