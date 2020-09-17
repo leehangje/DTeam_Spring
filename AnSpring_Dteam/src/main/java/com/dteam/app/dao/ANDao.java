@@ -136,10 +136,103 @@ public class ANDao {
 
 		return state;
 	}
+    
+    public MemberDto anIdCheck(String member_id) {
+		MemberDto adto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "					
+							+ " from tblmember" 
+							+ " where member_id = '" + member_id + "' ";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				member_id = resultSet.getString("member_id");
+				String member_nickname = resultSet.getString("member_nickname");
+				String member_tel = resultSet.getString("member_tel"); 
+				String member_addr = resultSet.getString("member_addr");
+				String member_latitude = resultSet.getString("member_latitude");
+				String member_longitude = resultSet.getString("member_longitude");
+				int member_grade = resultSet.getInt("member_grade");
+				String member_name = resultSet.getString("member_name"); 
 
+				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, 
+								     member_latitude, member_longitude, member_grade, member_name);							
+			}	
+				
+				System.out.println("MemberDTO id : " + adto.getMember_id());
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		
+		return adto;
+	} //anIdCheck()
+    
+	public MemberDto anNickNameCheck(String member_nickname) {
+		MemberDto adto = null;
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "					
+							+ " from tblmember" 
+							+ " where member_nickname = '" + member_nickname + "' ";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				member_nickname = resultSet.getString("member_nickname"); 
+
+				adto = new MemberDto(member_nickname);							
+			}	
+				
+				System.out.println("MemberDTO nickname : " + adto.getMember_nickname());
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {				
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		
+		return adto;
+	} //anNickNameCheck()
 
     
-	public MdDto anDetail(String md_serial_number) {
+	public MdDto anDetail(String md_serial_number_in) {
 		
 		MdDto mdDto = null;
 		Connection connection = null;
@@ -150,25 +243,25 @@ public class ANDao {
 			connection = dataSource.getConnection();
 			String sql = "select * "
 						+ "from tblmerchandise "
-						+ "where md_serial_number ='"+md_serial_number+"'";
+						+ "where md_serial_number ='"+md_serial_number_in+"'";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
 			
 			while (resultSet.next()) {
 				String md_name = resultSet.getString("md_name");
 				String md_category = resultSet.getString("md_category");
-				int md_price = resultSet.getInt("md_price");
+				String md_price = String.valueOf(resultSet.getInt("md_price"));
 				String md_rental_term = resultSet.getString("md_rental_term");
-				int md_deposit = resultSet.getInt("md_deposit");
+				String md_deposit = String.valueOf(resultSet.getInt("md_deposit"));
 				String md_detail_content = resultSet.getString("md_detail_content");
 				String md_photo_url = resultSet.getString("md_photo_url");
 				String member_id = resultSet.getString("member_id");
 				String member_addr = resultSet.getString("member_addr");
-				int md_fav_count = resultSet.getInt("md_fav_count");
+				String md_fav_count = String.valueOf(resultSet.getInt("md_fav_count"));
 				String md_registration_date = resultSet.getString("md_registration_date");
-				md_serial_number = resultSet.getString("md_serial_number");
-				int md_rent_status = resultSet.getInt("md_rent_status");
-				int md_hits = resultSet.getInt("md_hits");
+				String md_serial_number = resultSet.getString("md_serial_number");
+				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
+				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
 				
 				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit,
 						md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, 
@@ -199,6 +292,7 @@ public class ANDao {
 	}
 
 
+<<<<<<< HEAD
 	public int anInsert(String md_name, String md_photo_url, String md_title, String md_category, int md_price,
 			String md_rental_term, int md_deposit, String md_detail_content) {
 
@@ -230,6 +324,69 @@ public class ANDao {
 			System.out.println(e.getMessage());
 		} finally {
 			try {		
+=======
+	public ArrayList<MdDto> anMainSelect() {
+		
+		ArrayList<MdDto> mdDtos = new ArrayList<MdDto>();
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "select * "
+						+ " from tblmerchandise ";
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				String md_name = resultSet.getString("md_name");
+				String md_category = resultSet.getString("md_category");
+				String md_price = String.valueOf(resultSet.getInt("md_price"));
+				String md_rental_term = resultSet.getString("md_rental_term");
+				String md_deposit = String.valueOf(resultSet.getInt("md_deposit"));
+				String md_detail_content = resultSet.getString("md_detail_content");
+				String md_photo_url = resultSet.getString("md_photo_url");
+				String member_id = resultSet.getString("member_id");
+				String member_addr = resultSet.getString("member_addr");
+				String md_fav_count = String.valueOf(resultSet.getInt("md_fav_count"));
+				String md_registration_date = resultSet.getString("md_registration_date");
+				String md_serial_number = resultSet.getString("md_serial_number");
+				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
+				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
+				
+				System.out.println(
+						"String md_name : " + resultSet.getString("md_name") +
+						"String md_category : " + resultSet.getString("md_category") +
+						"int md_price : " + resultSet.getInt("md_price") + 
+						"String md_rental_term : " + resultSet.getString("md_rental_term")+
+						"int md_deposit : " + resultSet.getInt("md_deposit")+
+						"String md_detail_content : " + resultSet.getString("md_detail_content")+
+						"String md_photo_url : " + resultSet.getString("md_photo_url")+
+						"String member_id = " + resultSet.getString("member_id")+
+						"String member_addr : " + resultSet.getString("member_addr")+
+						"int md_fav_count : " + resultSet.getInt("md_fav_count")+
+						"String md_registration_date : " + resultSet.getString("md_registration_date")+
+						"String md_serial_number : " + resultSet.getString("md_serial_number")+
+						"int md_rent_status : " + resultSet.getInt("md_rent_status")+
+						"int md_hits : " + resultSet.getInt("md_hits")
+						);
+				
+				
+						
+						mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
+						md_deposit, md_detail_content, md_photo_url, member_id, member_addr,
+						md_fav_count, md_registration_date, md_serial_number, md_rent_status,
+						md_hits));
+						
+			}
+			System.out.println("mdDtos size : " + mdDtos.size());
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {			
+>>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 				if (resultSet != null) {
 					resultSet.close();
 				}
@@ -238,20 +395,33 @@ public class ANDao {
 				}
 				if (connection != null) {
 					connection.close();
+<<<<<<< HEAD
 				}	
 
+=======
+				}
+>>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 
 			}
 		}
+<<<<<<< HEAD
 
 		return state;
 		
 	}
 
 
+=======
+		return mdDtos;
+	}
+
+
+
+
+>>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 	
 
     /*

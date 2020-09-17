@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
+<<<<<<< HEAD
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="com.dteam.app.command.ACommand"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.dteam.app.command.AMdInsertCommand"/>
+=======
+<fullyQualifiedTypeName name="com.dteam.app.command.AMainSelectCommand"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+>>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 </qualifiedTypeNameHistroy>
