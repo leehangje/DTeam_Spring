@@ -26,6 +26,7 @@ import com.dteam.app.command.ACommand;
 import com.dteam.app.command.ADetailCommand;
 import com.dteam.app.command.AJoinCommand;
 import com.dteam.app.command.ALoginCommand;
+import com.dteam.app.command.AMdInsertCommand;
 
 @Controller
 public class AController {
@@ -148,5 +149,93 @@ public class AController {
 		
 		return "anDetail";
 	}
+	
+	@RequestMapping(value="/anInsert", method = {RequestMethod.GET, RequestMethod.POST}  )
+	public String anInsert(HttpServletRequest request, Model model){
+		System.out.println("anInsert()");
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 		
+		
+		String md_name = (String) request.getParameter("md_name");
+		String md_photo_url = (String) request.getParameter("md_photo_url");
+		String md_title = (String) request.getParameter("md_title");
+		String md_category = (String) request.getParameter("md_category");
+		String md_price = (String) request.getParameter("md_price");
+		String md_rental_term = (String) request.getParameter("md_rental_term");
+		String md_deposit = (String) request.getParameter("md_deposit");
+		String md_detail_content = (String) request.getParameter("md_detail_content");
+		
+		System.out.println(md_name);
+		System.out.println(md_photo_url);
+		System.out.println(md_title);
+		System.out.println(md_category);
+		System.out.println(md_price);
+		System.out.println(md_rental_term);
+		System.out.println(md_deposit);
+		System.out.println(md_detail_content);
+		
+		model.addAttribute("md_name", md_name);
+		model.addAttribute("md_photo_url", md_photo_url);
+		model.addAttribute("md_title", md_title);
+		model.addAttribute("md_category", md_category);
+		model.addAttribute("md_price", md_price);
+		model.addAttribute("md_rental_term", md_rental_term);
+		model.addAttribute("md_deposit", md_deposit);
+		model.addAttribute("md_detail_content", md_detail_content);
+		
+		MultipartRequest multi = (MultipartRequest)request;
+		MultipartFile file = multi.getFile("image");
+		
+		if(file != null) {
+			String fileName = file.getOriginalFilename();
+			System.out.println(fileName);
+			
+			// 디렉토리 존재하지 않으면 생성
+			makeDir(request);	
+				
+			if(file.getSize() > 0){			
+				String realImgPath = request.getSession().getServletContext()
+						.getRealPath("/resources/");
+				
+				System.out.println( fileName + " : " + realImgPath);
+				System.out.println( "fileSize : " + file.getSize());					
+												
+			 	try {
+			 		// 이미지파일 저장
+					file.transferTo(new File(realImgPath, fileName));										
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+									
+			}else{
+				// 이미지파일 실패시
+				fileName = "FileFail.jpg";
+				String realImgPath = request.getSession().getServletContext()
+						.getRealPath("/resources/" + fileName);
+				System.out.println(fileName + " : " + realImgPath);
+						
+			}			
+			
+		}
+				
+		command = new AMdInsertCommand();
+		command.execute(model);
+		
+		return "anInsert";
+	}
+
+	private void makeDir(HttpServletRequest request) {
+		File f = new File(request.getSession().getServletContext()
+				.getRealPath("/resources"));
+		if(!f.isDirectory()){
+		f.mkdir();
+		}	
+		
+	}
+	
 
 }

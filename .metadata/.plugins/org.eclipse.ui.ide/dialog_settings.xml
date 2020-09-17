@@ -5,19 +5,19 @@
 		<item value="org.aspectj:1.9.6.202007241909"/>
 		<item value="org.eclipse.ajdt:2.2.4.202007241909"/>
 		<item value="org.eclipse.buildship:3.1.4.v20200326-1743"/>
-		<item value="org.eclipse.egit.gitflow.feature:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.egit:5.8.0.202006091008-r"/>
+		<item value="org.eclipse.egit.gitflow.feature:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.egit:5.8.1.202007141445-r"/>
 		<item value="org.eclipse.emf.common:2.19.0.v20200324-0932"/>
 		<item value="org.eclipse.emf.ecore:2.22.0.v20200519-1135"/>
-		<item value="org.eclipse.epp.mpc:1.8.3.v20200526-1554"/>
+		<item value="org.eclipse.epp.mpc:1.8.4.v20200709-0857"/>
 		<item value="org.eclipse.help:2.3.200.v20200604-0540"/>
 		<item value="org.eclipse.jdt:3.18.400.v20200604-0540"/>
-		<item value="org.eclipse.jgit.gpg.bc:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.jgit.http.apache:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.jgit.lfs:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.jgit.ssh.apache:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.jgit.ssh.jsch:5.8.0.202006091008-r"/>
-		<item value="org.eclipse.jgit:5.8.0.202006091008-r"/>
+		<item value="org.eclipse.jgit.gpg.bc:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.jgit.http.apache:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.jgit.lfs:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.jgit.ssh.apache:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.jgit.ssh.jsch:5.8.1.202007141445-r"/>
+		<item value="org.eclipse.jgit:5.8.1.202007141445-r"/>
 		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.13.0.v202005211433"/>
 		<item value="org.eclipse.jst.enterprise_ui.feature:3.18.0.v202003201241"/>
 		<item value="org.eclipse.m2e.feature:1.16.1.20200710-1008"/>
@@ -56,19 +56,19 @@
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.15.1.201806191431"/>
 		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.5.202002191804"/>
-		<item value="org.springframework.ide.eclipse.ajdt.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.aop.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.autowire.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.batch.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.boot.dash.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.data.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.integration.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.maven.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.mylyn.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.security.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.webflow.feature:3.9.14.202007241544-CI-B2599"/>
-		<item value="org.springframework.ide.eclipse.xml.namespaces.feature:3.9.14.202007241544-CI-B2599"/>
+		<item value="org.springframework.ide.eclipse.ajdt.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.aop.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.autowire.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.batch.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.boot.dash.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.data.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.integration.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.maven.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.mylyn.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.security.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.webflow.feature:3.9.14.202009020636-CI-B2667"/>
+		<item value="org.springframework.ide.eclipse.xml.namespaces.feature:3.9.14.202009020636-CI-B2667"/>
 	</list>
 	<section name="NewWizardAction">
 	</section>
@@ -79,6 +79,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Dteam_spring"/>
 			<item value="D:\DTeam_Spring\AnSpring_DTeam"/>
 			<item value="D:\DTeam_Spring\AnSpring_Dteam"/>
 			<item value="D:\DTeam_Spring\AnSpring_App"/>

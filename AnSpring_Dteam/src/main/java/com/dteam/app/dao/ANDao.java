@@ -199,6 +199,59 @@ public class ANDao {
 	}
 
 
+	public int anInsert(String md_name, String md_photo_url, String md_title, String md_category, int md_price,
+			String md_rental_term, int md_deposit, String md_detail_content) {
+
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+
+		
+		int state = -1;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "insert into tblmerchandise(md_name, md_category, md_price, md_rental_term, " + 
+						  "md_deposit, md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, md_registration_date"
+						  + " ,md_serial_number,md_rent_status, md_hits  ) " + 
+			               "values('" + md_name + "', '" + md_category + "', '" + md_price + "', '" + 
+			               md_rental_term + "', '" + md_deposit + "', '" + md_detail_content + "', '" + 
+			               md_photo_url + "' )";
+			prepareStatement = connection.prepareStatement(sql);
+			state = prepareStatement.executeUpdate();
+			
+			if (state > 0) {
+				System.out.println(state + "삽입성공");				
+			} else {
+				System.out.println(state + "삽입실패");
+			}
+			
+		} catch (Exception e) {			
+			System.out.println(e.getMessage());
+		} finally {
+			try {		
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}	
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+
+		return state;
+		
+	}
+
+
 	
 
     /*
