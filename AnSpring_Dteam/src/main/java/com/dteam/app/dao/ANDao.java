@@ -14,7 +14,6 @@ import javax.sql.DataSource;
 import com.dteam.app.dto.MdDto;
 import com.dteam.app.dto.MemberDto;
 
-
 public class ANDao {
 
 	DataSource dataSource;
@@ -23,54 +22,52 @@ public class ANDao {
 		try {
 			Context context = new InitialContext();
 			/* dataSource = (DataSource) context.lookup("java:/comp/env/team01"); */
-			 dataSource = (DataSource) context.lookup("java:/comp/env/dteam"); 
-			/*dataSource = (DataSource) context.lookup("java:/comp/env/CSS");*/
+			dataSource = (DataSource) context.lookup("java:/comp/env/dteam");
+			/* dataSource = (DataSource) context.lookup("java:/comp/env/CSS"); */
 		} catch (NamingException e) {
 			e.getMessage();
 		}
 
 	}
-	
-	
-    public MemberDto anLogin(String id, String pw) {
 
-    	MemberDto adto = null;
+	public MemberDto anLogin(String id, String pw) {
+
+		MemberDto adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;		
-		
+		ResultSet resultSet = null;
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * "					
-							+ " from tblmember" 
-							+ " where member_id = '" + id + "' and member_pw = '" + pw + "' ";
+			String sql = "select * " + " from tblmember" + " where member_id = '" + id + "' and member_pw = '" + pw
+					+ "' ";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				String member_id = resultSet.getString("member_id");
 				String member_pw = resultSet.getString("member_pw");
 				String member_nickname = resultSet.getString("member_nickname");
-				String member_tel = resultSet.getString("member_tel"); 
+				String member_tel = resultSet.getString("member_tel");
 				String member_addr = resultSet.getString("member_addr");
 				String member_latitude = resultSet.getString("member_latitude");
 				String member_longitude = resultSet.getString("member_longitude");
 				int member_grade = resultSet.getInt("member_grade");
-				//int member_grade = Integer.parseInt(resultSet.getString("member_grade")); 
-				String member_name = resultSet.getString("member_name"); 
+				// int member_grade = Integer.parseInt(resultSet.getString("member_grade"));
+				String member_name = resultSet.getString("member_name");
 
-				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, 
-								     member_latitude, member_longitude, member_grade, member_name);							
-			}	
-			
+				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, member_latitude,
+						member_longitude, member_grade, member_name);
+			}
+
 			System.out.println("MemberDTO id : " + adto.getMember_id());
-			
+
 		} catch (Exception e) {
-			
+
 			System.out.println(e.getMessage());
 		} finally {
-			try {			
-				
+			try {
+
 				if (resultSet != null) {
 					resultSet.close();
 				}
@@ -79,7 +76,7 @@ public class ANDao {
 				}
 				if (connection != null) {
 					connection.close();
-				}	
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -92,40 +89,38 @@ public class ANDao {
 
 	}
 
-    public int anJoin(String member_id, String member_pw, String member_nickname, 
-    				  String member_tel, String member_addr, String member_latitude, 
-    				  String member_longitude, String member_name) { 
-    	
+	public int anJoin(String member_id, String member_pw, String member_nickname, String member_tel, String member_addr,
+			String member_latitude, String member_longitude, String member_name) {
+
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		int state = -100;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "insert into tblmember(member_id, member_pw, member_nickname, member_tel, " + 
-						  "member_addr, member_latitude, member_longitude, member_name) " + 
-			               "values('" + member_id + "', '" + member_pw + "', '" + member_nickname + "', '" + 
-			               member_tel + "', '" + member_addr + "', '" + member_latitude + "', '" + 
-			               member_longitude + "', '" + member_name + "' )";
+			String sql = "insert into tblmember(member_id, member_pw, member_nickname, member_tel, "
+					+ "member_addr, member_latitude, member_longitude, member_name) " + "values('" + member_id + "', '"
+					+ member_pw + "', '" + member_nickname + "', '" + member_tel + "', '" + member_addr + "', '"
+					+ member_latitude + "', '" + member_longitude + "', '" + member_name + "' )";
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
-			
+
 			if (state > 0) {
-				System.out.println(state + "삽입성공");				
+				System.out.println(state + "삽입성공");
 			} else {
 				System.out.println(state + "삽입실패");
 			}
-			
-		} catch (Exception e) {			
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {				
+			try {
 				if (prepareStatement != null) {
 					prepareStatement.close();
 				}
 				if (connection != null) {
 					connection.close();
-				}	
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -136,47 +131,45 @@ public class ANDao {
 
 		return state;
 	}
-    
-    public MemberDto anIdCheck(String member_id) {
+
+	public MemberDto anIdCheck(String member_id) {
 		MemberDto adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * "					
-							+ " from tblmember" 
-							+ " where member_id = '" + member_id + "' ";
+			String sql = "select * " + " from tblmember" + " where member_id = '" + member_id + "' ";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				member_id = resultSet.getString("member_id");
 				String member_nickname = resultSet.getString("member_nickname");
-				String member_tel = resultSet.getString("member_tel"); 
+				String member_tel = resultSet.getString("member_tel");
 				String member_addr = resultSet.getString("member_addr");
 				String member_latitude = resultSet.getString("member_latitude");
 				String member_longitude = resultSet.getString("member_longitude");
 				int member_grade = resultSet.getInt("member_grade");
-				String member_name = resultSet.getString("member_name"); 
+				String member_name = resultSet.getString("member_name");
 
-				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, 
-								     member_latitude, member_longitude, member_grade, member_name);							
-			}	
-				
-				System.out.println("MemberDTO id : " + adto.getMember_id());
-			
-		} catch (Exception e) {			
+				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, member_latitude,
+						member_longitude, member_grade, member_name);
+			}
+
+			System.out.println("MemberDTO id : " + adto.getMember_id());
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {				
+			try {
 				if (prepareStatement != null) {
 					prepareStatement.close();
 				}
 				if (connection != null) {
 					connection.close();
-				}	
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -184,42 +177,40 @@ public class ANDao {
 
 			}
 		}
-		
+
 		return adto;
-	} //anIdCheck()
-    
+	} // anIdCheck()
+
 	public MemberDto anNickNameCheck(String member_nickname) {
 		MemberDto adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * "					
-							+ " from tblmember" 
-							+ " where member_nickname = '" + member_nickname + "' ";
+			String sql = "select * " + " from tblmember" + " where member_nickname = '" + member_nickname + "' ";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
-			while (resultSet.next()) {
-				member_nickname = resultSet.getString("member_nickname"); 
 
-				adto = new MemberDto(member_nickname);							
-			}	
-				
-				System.out.println("MemberDTO nickname : " + adto.getMember_nickname());
-			
-		} catch (Exception e) {			
+			while (resultSet.next()) {
+				member_nickname = resultSet.getString("member_nickname");
+
+				adto = new MemberDto(member_nickname);
+			}
+
+			System.out.println("MemberDTO nickname : " + adto.getMember_nickname());
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {				
+			try {
 				if (prepareStatement != null) {
 					prepareStatement.close();
 				}
 				if (connection != null) {
 					connection.close();
-				}	
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -227,26 +218,23 @@ public class ANDao {
 
 			}
 		}
-		
-		return adto;
-	} //anNickNameCheck()
 
-    
+		return adto;
+	} // anNickNameCheck()
+
 	public MdDto anDetail(String md_serial_number_in) {
-		
+
 		MdDto mdDto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * "
-						+ "from tblmerchandise "
-						+ "where md_serial_number ='"+md_serial_number_in+"'";
+			String sql = "select * " + "from tblmerchandise " + "where md_serial_number ='" + md_serial_number_in + "'";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				String md_name = resultSet.getString("md_name");
 				String md_category = resultSet.getString("md_category");
@@ -262,17 +250,17 @@ public class ANDao {
 				String md_serial_number = resultSet.getString("md_serial_number");
 				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
 				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
-				
-				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit,
-						md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, 
-						md_registration_date, md_serial_number, md_rent_status, md_hits);
+
+				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit, md_detail_content,
+						md_photo_url, member_id, member_addr, md_fav_count, md_registration_date, md_serial_number,
+						md_rent_status, md_hits);
 			}
 			System.out.println("md_serial_number : " + mdDto.getMd_serial_number());
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {			
+			try {
 				if (resultSet != null) {
 					resultSet.close();
 				}
@@ -291,8 +279,6 @@ public class ANDao {
 		return mdDto;
 	}
 
-
-<<<<<<< HEAD
 	public int anInsert(String md_name, String md_photo_url, String md_title, String md_category, int md_price,
 			String md_rental_term, int md_deposit, String md_detail_content) {
 
@@ -300,45 +286,60 @@ public class ANDao {
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 
-		
 		int state = -1;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "insert into tblmerchandise(md_name, md_category, md_price, md_rental_term, " + 
-						  "md_deposit, md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, md_registration_date"
-						  + " ,md_serial_number,md_rent_status, md_hits  ) " + 
-			               "values('" + md_name + "', '" + md_category + "', '" + md_price + "', '" + 
-			               md_rental_term + "', '" + md_deposit + "', '" + md_detail_content + "', '" + 
-			               md_photo_url + "' )";
+			String sql = "insert into tblmerchandise(md_name, md_category, md_price, md_rental_term, "
+					+ "md_deposit, md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, md_registration_date"
+					+ " ,md_serial_number,md_rent_status, md_hits  ) " + "values('" + md_name + "', '" + md_category
+					+ "', '" + md_price + "', '" + md_rental_term + "', '" + md_deposit + "', '" + md_detail_content
+					+ "', '" + md_photo_url + "' )";
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
-			
+
 			if (state > 0) {
-				System.out.println(state + "삽입성공");				
+				System.out.println(state + "삽입성공");
 			} else {
 				System.out.println(state + "삽입실패");
 			}
-			
-		} catch (Exception e) {			
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {		
-=======
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		return state;
+	}
+
+	// 전체 상품정보 가져오기
 	public ArrayList<MdDto> anMainSelect() {
-		
+
 		ArrayList<MdDto> mdDtos = new ArrayList<MdDto>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * "
-						+ " from tblmerchandise ";
+			String sql = "select * " + " from tblmerchandise ";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				String md_name = resultSet.getString("md_name");
 				String md_category = resultSet.getString("md_category");
@@ -354,39 +355,36 @@ public class ANDao {
 				String md_serial_number = resultSet.getString("md_serial_number");
 				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
 				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
-				
-				System.out.println(
-						"String md_name : " + resultSet.getString("md_name") +
-						"String md_category : " + resultSet.getString("md_category") +
-						"int md_price : " + resultSet.getInt("md_price") + 
-						"String md_rental_term : " + resultSet.getString("md_rental_term")+
-						"int md_deposit : " + resultSet.getInt("md_deposit")+
-						"String md_detail_content : " + resultSet.getString("md_detail_content")+
-						"String md_photo_url : " + resultSet.getString("md_photo_url")+
-						"String member_id = " + resultSet.getString("member_id")+
-						"String member_addr : " + resultSet.getString("member_addr")+
-						"int md_fav_count : " + resultSet.getInt("md_fav_count")+
-						"String md_registration_date : " + resultSet.getString("md_registration_date")+
-						"String md_serial_number : " + resultSet.getString("md_serial_number")+
-						"int md_rent_status : " + resultSet.getInt("md_rent_status")+
-						"int md_hits : " + resultSet.getInt("md_hits")
-						);
-				
-				
-						
-						mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
-						md_deposit, md_detail_content, md_photo_url, member_id, member_addr,
-						md_fav_count, md_registration_date, md_serial_number, md_rent_status,
-						md_hits));
-						
+
+				/*
+				 * System.out.println( "String md_name : " + resultSet.getString("md_name") +
+				 * "String md_category : " + resultSet.getString("md_category") +
+				 * "int md_price : " + resultSet.getInt("md_price") + "String md_rental_term : "
+				 * + resultSet.getString("md_rental_term")+ "int md_deposit : " +
+				 * resultSet.getInt("md_deposit")+ "String md_detail_content : " +
+				 * resultSet.getString("md_detail_content")+ "String md_photo_url : " +
+				 * resultSet.getString("md_photo_url")+ "String member_id = " +
+				 * resultSet.getString("member_id")+ "String member_addr : " +
+				 * resultSet.getString("member_addr")+ "int md_fav_count : " +
+				 * resultSet.getInt("md_fav_count")+ "String md_registration_date : " +
+				 * resultSet.getString("md_registration_date")+ "String md_serial_number : " +
+				 * resultSet.getString("md_serial_number")+ "int md_rent_status : " +
+				 * resultSet.getInt("md_rent_status")+ "int md_hits : " +
+				 * resultSet.getInt("md_hits") );
+				 * 
+				 * 
+				 * mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
+				 * md_deposit, md_detail_content, md_photo_url, member_id, member_addr,
+				 * md_fav_count, md_registration_date, md_serial_number, md_rent_status,
+				 * md_hits));
+				 */
 			}
 			System.out.println("mdDtos size : " + mdDtos.size());
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			try {			
->>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
+			try {
 				if (resultSet != null) {
 					resultSet.close();
 				}
@@ -395,69 +393,46 @@ public class ANDao {
 				}
 				if (connection != null) {
 					connection.close();
-<<<<<<< HEAD
-				}	
-
-=======
 				}
->>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 
 			}
 		}
-<<<<<<< HEAD
-
-		return state;
-		
-	}
-
-
-=======
 		return mdDtos;
-	}
+	}// anMainSelect()
 
+	// 전체 회원정보 가져오기
+	public ArrayList<MemberDto> anMember() {
 
-
-
->>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
-	
-
-    /*
-	public ArrayList<ANDto> anSelectMulti() {		
-		
-		ArrayList<ANDto> adtos = new ArrayList<ANDto>();
+		ArrayList<MemberDto> memberDtos = new ArrayList<MemberDto>();
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;		
-		
+		ResultSet resultSet = null;
+
 		try {
 			connection = dataSource.getConnection();
-			String query = "select id, name, hire_date, image_path "					
-							+ " from android" 
-							+ " order by id desc";
-			prepareStatement = connection.prepareStatement(query);
+			String sql = "select * " + " from tblmember ";
+			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
-				String name = resultSet.getString("name");
-				Date date = resultSet.getDate("hire_date"); 
-				String imagePath = resultSet.getString("image_path"); 
-
-				ANDto adto = new ANDto(id, name, date, imagePath);
-				adtos.add(adto);			
-			}	
-			
-			System.out.println("adtos크기" + adtos.size());
-			
+				String member_id = resultSet.getString("member_id");
+				String member_pw = resultSet.getString("member_pw");
+				String member_nickname = resultSet.getString("member_nickname");
+				String member_tel = resultSet.getString("member_tel");
+				String member_addr = resultSet.getString("member_addr");
+				String member_latitude = resultSet.getString("member_latitude");
+				String member_longitude = resultSet.getString("member_longitude");
+				String member_grade = String.valueOf(resultSet.getInt("member_grade"));
+				String member_name = resultSet.getString("member_name");
+			}
+			System.out.println("memberDtos size : " + memberDtos.size());
 		} catch (Exception e) {
-			
 			System.out.println(e.getMessage());
 		} finally {
-			try {			
-				
+			try {
 				if (resultSet != null) {
 					resultSet.close();
 				}
@@ -466,220 +441,172 @@ public class ANDao {
 				}
 				if (connection != null) {
 					connection.close();
-				}	
-
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 
 			}
 		}
+		return memberDtos;
+	}// anMember()
 
-		return adtos;
-
-	}
-	*/
-    
 	/*
-	public int anInsertMulti(int id, String name, String date, String dbImgPath) {
-		
-		Connection connection = null;
-		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;
-				
-		int state = -1;
+	 * public ArrayList<ANDto> anSelectMulti() {
+	 * 
+	 * ArrayList<ANDto> adtos = new ArrayList<ANDto>(); Connection connection =
+	 * null; PreparedStatement prepareStatement = null; ResultSet resultSet = null;
+	 * 
+	 * try { connection = dataSource.getConnection(); String query =
+	 * "select id, name, hire_date, image_path " + " from android" +
+	 * " order by id desc"; prepareStatement = connection.prepareStatement(query);
+	 * resultSet = prepareStatement.executeQuery();
+	 * 
+	 * while (resultSet.next()) { int id = resultSet.getInt("id"); String name =
+	 * resultSet.getString("name"); Date date = resultSet.getDate("hire_date");
+	 * String imagePath = resultSet.getString("image_path");
+	 * 
+	 * ANDto adto = new ANDto(id, name, date, imagePath); adtos.add(adto); }
+	 * 
+	 * System.out.println("adtos크기" + adtos.size());
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * System.out.println(e.getMessage()); } finally { try {
+	 * 
+	 * if (resultSet != null) { resultSet.close(); } if (prepareStatement != null) {
+	 * prepareStatement.close(); } if (connection != null) { connection.close(); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally {
+	 * 
+	 * } }
+	 * 
+	 * return adtos;
+	 * 
+	 * }
+	 */
 
-		try {			
-			// 
-			connection = dataSource.getConnection();
-			String query = "insert into android(id, name, hire_date, image_path) " + "values(" + id + ",'" 
-							+ name + "'," + "to_date('" + date + "','rr/mm/dd') , '" + dbImgPath + "' )";
+	/*
+	 * public int anInsertMulti(int id, String name, String date, String dbImgPath)
+	 * {
+	 * 
+	 * Connection connection = null; PreparedStatement prepareStatement = null;
+	 * ResultSet resultSet = null;
+	 * 
+	 * int state = -1;
+	 * 
+	 * try { // connection = dataSource.getConnection(); String query =
+	 * "insert into android(id, name, hire_date, image_path) " + "values(" + id +
+	 * ",'" + name + "'," + "to_date('" + date + "','rr/mm/dd') , '" + dbImgPath +
+	 * "' )";
+	 * 
+	 * prepareStatement = connection.prepareStatement(query); state =
+	 * prepareStatement.executeUpdate();
+	 * 
+	 * if (state > 0) { System.out.println(state + "삽입성공"); } else {
+	 * System.out.println(state + "삽입실패"); }
+	 * 
+	 * } catch (Exception e) { System.out.println(e.getMessage()); } finally { try {
+	 * if (resultSet != null) { resultSet.close(); } if (prepareStatement != null) {
+	 * prepareStatement.close(); } if (connection != null) { connection.close(); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * }
+	 * 
+	 * return state;
+	 * 
+	 * }
+	 */
+	/*
+	 * public int anUpdateMulti(int id, String name, String date, String dbImgPath)
+	 * {
+	 * 
+	 * Connection connection = null; PreparedStatement prepareStatement = null;
+	 * ResultSet resultSet = null;
+	 * 
+	 * int state = -1;
+	 * 
+	 * try { // 아이디는 수정할수 없음 connection = dataSource.getConnection(); String query =
+	 * "update android set " + " name = '" + name + "' " + ", hire_date = '" + date
+	 * + "' " + ", image_path = '" + dbImgPath + "' " + " where id = " + id ;
+	 * 
+	 * prepareStatement = connection.prepareStatement(query); state =
+	 * prepareStatement.executeUpdate();
+	 * 
+	 * if (state > 0) { System.out.println("수정1성공");
+	 * 
+	 * } else { System.out.println("수정1실패"); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally { try { if (resultSet
+	 * != null) { resultSet.close(); } if (prepareStatement != null) {
+	 * prepareStatement.close(); } if (connection != null) { connection.close(); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally {
+	 * 
+	 * } }
+	 * 
+	 * return state;
+	 * 
+	 * }
+	 */
+	/*
+	 * public int anUpdateMultiNo(int id, String name, String date) {
+	 * 
+	 * Connection connection = null; PreparedStatement prepareStatement = null;
+	 * ResultSet resultSet = null;
+	 * 
+	 * int state = -1;
+	 * 
+	 * try { // 아이디는 수정할수 없음 connection = dataSource.getConnection(); String query =
+	 * "update android set " + " name = '" + name + "' " + ", hire_date = '" + date
+	 * + "' " + " where id = " + id ;
+	 * 
+	 * prepareStatement = connection.prepareStatement(query); state =
+	 * prepareStatement.executeUpdate();
+	 * 
+	 * if (state > 0) { System.out.println("수정2성공");
+	 * 
+	 * } else { System.out.println("수정2실패"); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally { try { if (resultSet
+	 * != null) { resultSet.close(); } if (prepareStatement != null) {
+	 * prepareStatement.close(); } if (connection != null) { connection.close(); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally {
+	 * 
+	 * } }
+	 * 
+	 * return state; }
+	 */
+	/*
+	 * public int anDeleteMulti(int id) {
+	 * 
+	 * Connection connection = null; PreparedStatement prepareStatement = null;
+	 * ResultSet resultSet = null;
+	 * 
+	 * int state = -1;
+	 * 
+	 * try { connection = dataSource.getConnection(); String query =
+	 * "delete from android where id=" + id;
+	 * 
+	 * System.out.println(id);
+	 * 
+	 * prepareStatement = connection.prepareStatement(query); state =
+	 * prepareStatement.executeUpdate();
+	 * 
+	 * if (state > 0) { System.out.println("삭제성공"); } else {
+	 * System.out.println("삭제실패"); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally { try { if (resultSet
+	 * != null) { resultSet.close(); } if (prepareStatement != null) {
+	 * prepareStatement.close(); } if (connection != null) { connection.close(); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 * return state;
+	 * 
+	 * }
+	 */
 
-			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
-			
-			if (state > 0) {
-				System.out.println(state + "삽입성공");				
-			} else {
-				System.out.println(state + "삽입실패");
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (prepareStatement != null) {
-					prepareStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-
-		}
-
-		return state;
-
-	}
-	*/
-    /*
-	public int anUpdateMulti(int id, String name, String date, String dbImgPath) {
-		
-		Connection connection = null;
-		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;
-		
-		int state = -1;
-	
-		try {			
-			// 아이디는 수정할수 없음			
-			connection = dataSource.getConnection();
-			String query = "update android set " 			             
-		             + " name = '" + name + "' "
-		             + ", hire_date = '" + date + "' "
-		             + ", image_path = '" + dbImgPath + "' "
-					 + " where id = " + id ;
-			
-			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
-	
-			if (state > 0) {
-				System.out.println("수정1성공");
-				
-			} else {
-				System.out.println("수정1실패");
-			}
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (prepareStatement != null) {
-					prepareStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-	
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-	
-			}
-		}
-	
-		return state;
-	
-	}
-	*/
-    /*
-	public int anUpdateMultiNo(int id, String name, String date) {
-		
-		Connection connection = null;
-		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;
-		
-		int state = -1;
-	
-		try {			
-			// 아이디는 수정할수 없음			
-			connection = dataSource.getConnection();
-			String query = "update android set " 			             
-		             + " name = '" + name + "' "
-		             + ", hire_date = '" + date + "' "		             
-					 + " where id = " + id ;
-			
-			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
-	
-			if (state > 0) {
-				System.out.println("수정2성공");
-				
-			} else {
-				System.out.println("수정2실패");
-			}
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (prepareStatement != null) {
-					prepareStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-	
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-	
-			}
-		}
-	
-		return state;
-	}
-	*/
-    /*
-	public int anDeleteMulti(int id) {
-		
-		Connection connection = null;
-		PreparedStatement prepareStatement = null;
-		ResultSet resultSet = null;
-		
-		int state = -1;
-
-		try {
-			connection = dataSource.getConnection();
-			String query = "delete from android where id=" + id;
-			
-			System.out.println(id);
-
-			prepareStatement = connection.prepareStatement(query);
-			state = prepareStatement.executeUpdate();
-
-			if (state > 0) {
-				System.out.println("삭제성공");				
-			} else {
-				System.out.println("삭제실패");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (prepareStatement != null) {
-					prepareStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return state;
-
-	}
-	*/
-		
-	
-	
 }

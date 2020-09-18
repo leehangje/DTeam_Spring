@@ -27,12 +27,9 @@ import com.dteam.app.command.ADetailCommand;
 import com.dteam.app.command.AIdCheckCommand;
 import com.dteam.app.command.AJoinCommand;
 import com.dteam.app.command.ALoginCommand;
-<<<<<<< HEAD
 import com.dteam.app.command.AMdInsertCommand;
-=======
 import com.dteam.app.command.AMainSelectCommand;
 import com.dteam.app.command.ANickNameCheckCommand;
->>>>>>> 5b20ed33d0ea36d16ef898b1f2487ec74e316bd7
 
 @Controller
 public class AController {
