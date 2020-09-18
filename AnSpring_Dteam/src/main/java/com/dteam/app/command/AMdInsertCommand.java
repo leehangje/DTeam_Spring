@@ -17,7 +17,7 @@ public class AMdInsertCommand implements ACommand {
 		String md_detail_content = (String) model.asMap().get("md_detail_content");
 		
 		ANDao adao = new ANDao();
-		adao.anInsert(md_detail_content, md_rental_term, md_category, md_title, md_deposit, md_name, md_price, md_photo_url);
+		adao.anInsert(md_name, md_photo_url, md_title, md_category, md_price, md_rental_term, md_deposit, md_detail_content);
 
 		
 	}

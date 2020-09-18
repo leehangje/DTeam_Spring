@@ -289,12 +289,13 @@ public class ANDao {
 		int state = -1;
 
 		try {
-			connection = dataSource.getConnection();
-			String sql = "insert into tblmerchandise(md_name, md_category, md_price, md_rental_term, "
-					+ "md_deposit, md_detail_content, md_photo_url, member_id, member_addr, md_fav_count, md_registration_date"
-					+ " ,md_serial_number,md_rent_status, md_hits  ) " + "values('" + md_name + "', '" + md_category
-					+ "', '" + md_price + "', '" + md_rental_term + "', '" + md_deposit + "', '" + md_detail_content
-					+ "', '" + md_photo_url + "' )";
+			connection = dataSource.getConnection(); //md_title, 빠짐 DTO에 컬럼 빠짐
+			String sql = "insert into tblmerchandise(md_name, md_photo_url,  md_category, md_price, md_rental_term, "
+					+ "md_deposit, md_detail_content) " //md_title + "', '"
+					+ "values('" + md_name + "', '" + md_photo_url + "', '"   
+								+ md_category + "', '" + md_price + "', '" + md_rental_term
+								+ "', '" + md_deposit +"', '" + md_detail_content +"' )";
+			
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
 
