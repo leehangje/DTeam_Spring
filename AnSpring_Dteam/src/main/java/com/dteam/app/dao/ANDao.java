@@ -52,12 +52,14 @@ public class ANDao {
 				String member_addr = resultSet.getString("member_addr");
 				String member_latitude = resultSet.getString("member_latitude");
 				String member_longitude = resultSet.getString("member_longitude");
-				int member_grade = resultSet.getInt("member_grade");
+				String member_grade = resultSet.getString("member_grade");
 				// int member_grade = Integer.parseInt(resultSet.getString("member_grade"));
 				String member_name = resultSet.getString("member_name");
+				String member_profile = resultSet.getString("member_profile");
 
-				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, member_latitude,
-						member_longitude, member_grade, member_name);
+				adto = new MemberDto(member_id, member_pw, member_nickname, 
+						member_tel, member_addr, member_latitude, member_longitude, 
+						member_grade, member_name, member_profile);
 			}
 
 			System.out.println("MemberDTO id : " + adto.getMember_id());
@@ -151,7 +153,7 @@ public class ANDao {
 				String member_addr = resultSet.getString("member_addr");
 				String member_latitude = resultSet.getString("member_latitude");
 				String member_longitude = resultSet.getString("member_longitude");
-				int member_grade = resultSet.getInt("member_grade");
+				String member_grade = resultSet.getString("member_grade");
 				String member_name = resultSet.getString("member_name");
 
 				adto = new MemberDto(member_id, member_nickname, member_tel, member_addr, member_latitude,
