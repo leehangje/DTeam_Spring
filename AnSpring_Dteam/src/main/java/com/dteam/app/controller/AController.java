@@ -177,35 +177,10 @@ public class AController {
 			e.printStackTrace();
 		} 		
 		
-		//String md_name = (String)request.getParameter("md_name");
-		//String md_category = (String)request.getParameter("md_category");
-		//String md_price = (String)request.getParameter("md_price");
-		//String md_rental_term = (String)request.getParameter("md_rental_term");
-		//String md_deposit = (String)request.getParameter("md_deposit");
-		//String md_detail_content = (String)request.getParameter("md_detail_content");
-		//String md_photo_url = (String)request.getParameter("md_photo_url");
-		//String member_id = (String)request.getParameter("member_id");
-		//String member_addr = (String)request.getParameter("member_addr");
-		//String md_fav_count = (String)request.getParameter("md_fav_count");
-		//String md_registration_date = (String)request.getParameter("md_registration_date");
-		String md_serial_number = (String)request.getParameter("md_serial_number");
-		//String md_rent_status = (String)request.getParameter("md_rent_status");
-		//String md_hits = (String)request.getParameter("md_hits");
 		
-		//System.out.println(md_name);
-		//System.out.println(md_category);
-		//System.out.println(md_price);
-		//System.out.println(md_rental_term);
-		//System.out.println(md_deposit);
-		//System.out.println(md_detail_content);
-		//System.out.println(md_photo_url);
-		//System.out.println(member_id);
-		//System.out.println(member_addr);
-		//System.out.println(md_fav_count);
-		//System.out.println(md_registration_date);
+		String md_serial_number = (String)request.getParameter("md_serial_number");
+		
 		System.out.println(md_serial_number);
-		//System.out.println(md_rent_status);
-		//System.out.println(md_hits);
 		
 		model.addAttribute("md_serial_number", md_serial_number);
 		

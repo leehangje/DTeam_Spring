@@ -9,7 +9,6 @@ public class MdDto {
 	String md_detail_content;
 	String md_photo_url;
 	String member_id;
-	String member_addr;
 	String md_fav_count;
 	String md_registration_date;
 	String md_serial_number;
@@ -18,7 +17,7 @@ public class MdDto {
 	
 	
 	public MdDto(String md_name, String md_category, String md_price, String md_rental_term, String md_deposit,
-			String md_detail_content, String md_photo_url, String member_id, String member_addr, String md_fav_count,
+			String md_detail_content, String md_photo_url, String member_id, String md_fav_count,
 			String md_registration_date, String md_serial_number, String md_rent_status, String md_hits) {
 		super();
 		this.md_name = md_name;
@@ -29,7 +28,6 @@ public class MdDto {
 		this.md_detail_content = md_detail_content;
 		this.md_photo_url = md_photo_url;
 		this.member_id = member_id;
-		this.member_addr = member_addr;
 		this.md_fav_count = md_fav_count;
 		this.md_registration_date = md_registration_date;
 		this.md_serial_number = md_serial_number;
@@ -115,16 +113,6 @@ public class MdDto {
 
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
-	}
-
-
-	public String getMember_addr() {
-		return member_addr;
-	}
-
-
-	public void setMember_addr(String member_addr) {
-		this.member_addr = member_addr;
 	}
 
 

@@ -233,28 +233,27 @@ public class ANDao {
 
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * " + "from tblmerchandise " + "where md_serial_number ='" + md_serial_number_in + "'";
+			String sql = "select * from tblmerchandise where md_serial_number ='" + md_serial_number_in + "'";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
 
 			while (resultSet.next()) {
 				String md_name = resultSet.getString("md_name");
 				String md_category = resultSet.getString("md_category");
-				String md_price = String.valueOf(resultSet.getInt("md_price"));
+				String md_price = resultSet.getString("md_price");
 				String md_rental_term = resultSet.getString("md_rental_term");
-				String md_deposit = String.valueOf(resultSet.getInt("md_deposit"));
+				String md_deposit = resultSet.getString("md_deposit");
 				String md_detail_content = resultSet.getString("md_detail_content");
 				String md_photo_url = resultSet.getString("md_photo_url");
 				String member_id = resultSet.getString("member_id");
-				String member_addr = resultSet.getString("member_addr");
-				String md_fav_count = String.valueOf(resultSet.getInt("md_fav_count"));
+				String md_fav_count = resultSet.getString("md_fav_count");
 				String md_registration_date = resultSet.getString("md_registration_date");
 				String md_serial_number = resultSet.getString("md_serial_number");
-				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
-				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
+				String md_rent_status = resultSet.getString("md_rent_status");
+				String md_hits = resultSet.getString("md_hits");
 
 				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit, md_detail_content,
-						md_photo_url, member_id, member_addr, md_fav_count, md_registration_date, md_serial_number,
+						md_photo_url, member_id, md_fav_count, md_registration_date, md_serial_number,
 						md_rent_status, md_hits);
 			}
 			System.out.println("md_serial_number : " + mdDto.getMd_serial_number());
@@ -329,6 +328,8 @@ public class ANDao {
 		return state;
 	}
 
+	
+	
 	// 전체 상품정보 가져오기
 	public ArrayList<MdDto> anMainSelect() {
 
@@ -339,48 +340,30 @@ public class ANDao {
 
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * " + " from tblmerchandise ";
+			String sql = "select * from tblmerchandise";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
 
 			while (resultSet.next()) {
 				String md_name = resultSet.getString("md_name");
 				String md_category = resultSet.getString("md_category");
-				String md_price = String.valueOf(resultSet.getInt("md_price"));
+				String md_price = resultSet.getString("md_price");
 				String md_rental_term = resultSet.getString("md_rental_term");
-				String md_deposit = String.valueOf(resultSet.getInt("md_deposit"));
+				String md_deposit = resultSet.getString("md_deposit");
 				String md_detail_content = resultSet.getString("md_detail_content");
 				String md_photo_url = resultSet.getString("md_photo_url");
 				String member_id = resultSet.getString("member_id");
-				String member_addr = resultSet.getString("member_addr");
-				String md_fav_count = String.valueOf(resultSet.getInt("md_fav_count"));
+				String md_fav_count = resultSet.getString("md_fav_count");
 				String md_registration_date = resultSet.getString("md_registration_date");
 				String md_serial_number = resultSet.getString("md_serial_number");
-				String md_rent_status = String.valueOf(resultSet.getInt("md_rent_status"));
-				String md_hits = String.valueOf(resultSet.getInt("md_hits"));
+				String md_rent_status = resultSet.getString("md_rent_status");
+				String md_hits = resultSet.getString("md_hits");
 
-				/*
-				 * System.out.println( "String md_name : " + resultSet.getString("md_name") +
-				 * "String md_category : " + resultSet.getString("md_category") +
-				 * "int md_price : " + resultSet.getInt("md_price") + "String md_rental_term : "
-				 * + resultSet.getString("md_rental_term")+ "int md_deposit : " +
-				 * resultSet.getInt("md_deposit")+ "String md_detail_content : " +
-				 * resultSet.getString("md_detail_content")+ "String md_photo_url : " +
-				 * resultSet.getString("md_photo_url")+ "String member_id = " +
-				 * resultSet.getString("member_id")+ "String member_addr : " +
-				 * resultSet.getString("member_addr")+ "int md_fav_count : " +
-				 * resultSet.getInt("md_fav_count")+ "String md_registration_date : " +
-				 * resultSet.getString("md_registration_date")+ "String md_serial_number : " +
-				 * resultSet.getString("md_serial_number")+ "int md_rent_status : " +
-				 * resultSet.getInt("md_rent_status")+ "int md_hits : " +
-				 * resultSet.getInt("md_hits") );
-				 * 
-				 * 
-				 * mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
-				 * md_deposit, md_detail_content, md_photo_url, member_id, member_addr,
-				 * md_fav_count, md_registration_date, md_serial_number, md_rent_status,
-				 * md_hits));
-				 */
+				 
+				mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
+						md_deposit, md_detail_content, md_photo_url, member_id,  md_fav_count, 
+						md_registration_date, md_serial_number, md_rent_status, md_hits));
+				 
 			}
 			System.out.println("mdDtos size : " + mdDtos.size());
 
