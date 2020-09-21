@@ -202,32 +202,36 @@ public class AController {
 		
 		String md_name = (String) request.getParameter("md_name");
 		String md_photo_url = (String) request.getParameter("md_photo_url");
-		String md_title = (String) request.getParameter("md_title");
 		String md_category = (String) request.getParameter("md_category");
 		String md_price = (String) request.getParameter("md_price");
 		String md_rental_term = (String) request.getParameter("md_rental_term");
 		String md_deposit = (String) request.getParameter("md_deposit");
 		String md_detail_content = (String) request.getParameter("md_detail_content");
+		String member_id = (String) request.getParameter("member_id");
+		String md_serial_number = (String) request.getParameter("md_serial_number");
+		
 		
 		System.out.println(md_name);
 		System.out.println(md_photo_url);
-		System.out.println(md_title);
 		System.out.println(md_category);
 		System.out.println(md_price);
 		System.out.println(md_rental_term);
 		System.out.println(md_deposit);
 		System.out.println(md_detail_content);
+		System.out.println(member_id);
+		System.out.println(md_serial_number);
 		
 		model.addAttribute("md_name", md_name);
 		model.addAttribute("md_photo_url", md_photo_url);
-		model.addAttribute("md_title", md_title);
 		model.addAttribute("md_category", md_category);
 		model.addAttribute("md_price", md_price);
 		model.addAttribute("md_rental_term", md_rental_term);
 		model.addAttribute("md_deposit", md_deposit);
 		model.addAttribute("md_detail_content", md_detail_content);
+		model.addAttribute("member_id", member_id);
+		model.addAttribute("md_serial_number", md_serial_number);
 		
-		MultipartRequest multi = (MultipartRequest)request;
+		MultipartRequest multi = (MultipartRequest) request;
 		MultipartFile file = multi.getFile("image");
 		
 		if(file != null) {
@@ -262,8 +266,8 @@ public class AController {
 			
 		}
 				
-		command = new AMdInsertCommand();
-		command.execute(model);
+//		command = new AMdInsertCommand();
+//		command.execute(model);
 		
 		return "anInsert";
 	}

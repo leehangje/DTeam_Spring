@@ -280,8 +280,8 @@ public class ANDao {
 		return mdDto;
 	}
 
-	public int anInsert(String md_name, String md_photo_url, String md_title, String md_category, int md_price,
-			String md_rental_term, int md_deposit, String md_detail_content) {
+	public int anInsert(String md_name, String md_photo_url, String md_category, String md_price,
+			String md_rental_term, String md_deposit, String md_detail_content, String member_id, String md_serial_number ) {
 
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -292,10 +292,10 @@ public class ANDao {
 		try {
 			connection = dataSource.getConnection(); //md_title, 빠짐 DTO에 컬럼 빠짐
 			String sql = "insert into tblmerchandise(md_name, md_photo_url,  md_category, md_price, md_rental_term, "
-					+ "md_deposit, md_detail_content) " //md_title + "', '"
+					+ "md_deposit, md_detail_content, member_id, md_serial_number) " //md_title + "', '"
 					+ "values('" + md_name + "', '" + md_photo_url + "', '"   
 								+ md_category + "', '" + md_price + "', '" + md_rental_term
-								+ "', '" + md_deposit +"', '" + md_detail_content +"' )";
+								+ "', '" + md_deposit +"', '" + md_detail_content + "','" + member_id + "','" + md_serial_number +  "' )";
 			
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
@@ -436,6 +436,8 @@ public class ANDao {
 		}
 		return memberDtos;
 	}// anMember()
+
+
 
 	/*
 	 * public ArrayList<ANDto> anSelectMulti() {
