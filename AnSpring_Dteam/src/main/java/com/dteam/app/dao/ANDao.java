@@ -295,7 +295,7 @@ public class ANDao {
 					+ "md_deposit, md_detail_content, member_id, md_serial_number) " //md_title + "', '"
 					+ "values('" + md_name + "', '" + md_photo_url + "', '"   
 								+ md_category + "', '" + md_price + "', '" + md_rental_term
-								+ "', '" + md_deposit +"', '" + md_detail_content + "','" + member_id + "','" + md_serial_number +  "' )";
+								+ "', '" + md_deposit +"', '" + md_detail_content + "','" + member_id + "', seq_md_serial.nextval)";
 			
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();

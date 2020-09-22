@@ -266,8 +266,8 @@ public class AController {
 			
 		}
 				
-//		command = new AMdInsertCommand();
-//		command.execute(model);
+		command = new AMdInsertCommand();
+		command.execute(model);
 		
 		return "anInsert";
 	}
