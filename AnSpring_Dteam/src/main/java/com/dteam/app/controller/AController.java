@@ -177,12 +177,11 @@ public class AController {
 			e.printStackTrace();
 		} 		
 		
+		String member_id = (String)request.getParameter("member_id");
 		
-		String md_serial_number = (String)request.getParameter("md_serial_number");
+		System.out.println(member_id);
 		
-		System.out.println(md_serial_number);
-		
-		model.addAttribute("md_serial_number", md_serial_number);
+		model.addAttribute("member_id", member_id);
 		
 		command = new ADetailCommand();
 		command.execute(model);

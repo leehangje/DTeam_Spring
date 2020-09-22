@@ -224,39 +224,40 @@ public class ANDao {
 		return adto;
 	} // anNickNameCheck()
 
-	public MdDto anDetail(String md_serial_number_in) {
+	public MemberDto anDetail(String member_idin) {
 
-		MdDto mdDto = null;
+		MemberDto adto = null;
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = dataSource.getConnection();
-			String sql = "select * from tblmerchandise where md_serial_number ='" + md_serial_number_in + "'";
+			String sql = "select * from tblmember where member_id = '" + member_idin + "' ";
 			prepareStatement = connection.prepareStatement(sql);
 			resultSet = prepareStatement.executeQuery();
 
 			while (resultSet.next()) {
-				String md_name = resultSet.getString("md_name");
-				String md_category = resultSet.getString("md_category");
-				String md_price = resultSet.getString("md_price");
-				String md_rental_term = resultSet.getString("md_rental_term");
-				String md_deposit = resultSet.getString("md_deposit");
-				String md_detail_content = resultSet.getString("md_detail_content");
-				String md_photo_url = resultSet.getString("md_photo_url");
 				String member_id = resultSet.getString("member_id");
-				String md_fav_count = resultSet.getString("md_fav_count");
-				String md_registration_date = resultSet.getString("md_registration_date");
-				String md_serial_number = resultSet.getString("md_serial_number");
-				String md_rent_status = resultSet.getString("md_rent_status");
-				String md_hits = resultSet.getString("md_hits");
+			    String member_pw = resultSet.getString("member_pw");
+			    String member_nickname = resultSet.getString("member_nickname");
+			    String member_tel = resultSet.getString("member_tel");
+			    String member_addr = resultSet.getString("member_addr");
+			    String member_latitude = resultSet.getString("member_latitude");
+			    String member_longitude = resultSet.getString("member_longitude");
+			    String member_grade = resultSet.getString("member_grade");
+			    String member_name = resultSet.getString("member_name");
+			    String member_profile = resultSet.getString("member_profile");
+				/*
+				 * String member_logintype = resultSet.getString("member_logintype"); String
+				 * member_token = resultSet.getString("member_token");
+				 */				
 
-				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit, md_detail_content,
-						md_photo_url, member_id, md_fav_count, md_registration_date, md_serial_number,
-						md_rent_status, md_hits);
+			    adto = new MemberDto(member_id, member_pw, member_nickname, member_tel, member_addr, member_latitude,
+						member_longitude, member_grade, member_name, member_profile);
+			
 			}
-			System.out.println("md_serial_number : " + mdDto.getMd_serial_number());
+			System.out.println("member_id : " + adto.getMember_id());
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -277,7 +278,7 @@ public class ANDao {
 
 			}
 		}
-		return mdDto;
+		return adto;
 	}
 
 	public int anInsert(String md_name, String md_photo_url, String md_category, String md_price,
