@@ -30,6 +30,7 @@ import com.dteam.app.command.ALoginCommand;
 import com.dteam.app.command.AMdInsertCommand;
 import com.dteam.app.command.AMainSelectCommand;
 import com.dteam.app.command.ANickNameCheckCommand;
+import com.dteam.app.command.ASearchSelectCommand;
 
 @Controller
 public class AController {
@@ -165,6 +166,26 @@ public class AController {
 		
 		return "anMainSelect";
 	}
+	
+	
+	
+	//검색페이지 
+		@RequestMapping(value="/SearchSelect", method = {RequestMethod.GET, RequestMethod.POST} )
+		public String SearchSelect(HttpServletRequest request, Model model) {
+			System.out.println("SearchSelect()");
+			
+			try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} 	
+			
+			command = new ASearchSelectCommand();
+			
+			command.execute(model);
+			
+			return "anSearchSelect";
+		}
 
 	
 	@RequestMapping(value="/anDetail", method = {RequestMethod.GET, RequestMethod.POST} )
