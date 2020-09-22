@@ -6608,3 +6608,9 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-09-22 17:09:31.689
 !MESSAGE executing callback sts4.classpath.lYkQiiLb SUCCESS [done]
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2020-09-22 18:52:24.284
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2020-09-22 18:52:24.286
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
