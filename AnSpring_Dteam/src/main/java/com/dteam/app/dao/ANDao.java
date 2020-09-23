@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import org.apache.commons.mail.EmailAttachment;
+import org.apache.commons.mail.HtmlEmail;
 
 import com.dteam.app.dto.MdDto;
 import com.dteam.app.dto.MemberDto;
@@ -57,9 +61,8 @@ public class ANDao {
 				String member_name = resultSet.getString("member_name");
 				String member_profile = resultSet.getString("member_profile");
 
-				adto = new MemberDto(member_id, member_pw, member_nickname, 
-						member_tel, member_addr, member_latitude, member_longitude, 
-						member_grade, member_name, member_profile);
+				adto = new MemberDto(member_id, member_pw, member_nickname, member_tel, member_addr, member_latitude,
+						member_longitude, member_grade, member_name, member_profile);
 			}
 
 			System.out.println("MemberDTO id : " + adto.getMember_id());
@@ -253,8 +256,8 @@ public class ANDao {
 				String md_hits = resultSet.getString("md_hits");
 
 				mdDto = new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit, md_detail_content,
-						md_photo_url, member_id, md_fav_count, md_registration_date, md_serial_number,
-						md_rent_status, md_hits);
+						md_photo_url, member_id, md_fav_count, md_registration_date, md_serial_number, md_rent_status,
+						md_hits);
 			}
 			System.out.println("md_serial_number : " + mdDto.getMd_serial_number());
 
@@ -280,8 +283,8 @@ public class ANDao {
 		return mdDto;
 	}
 
-	public int anInsert(String md_name, String md_photo_url, String md_category, String md_price,
-			String md_rental_term, String md_deposit, String md_detail_content, String member_id, String md_serial_number ) {
+	public int anInsert(String md_name, String md_photo_url, String md_title, String md_category, int md_price,
+			String md_rental_term, int md_deposit, String md_detail_content) {
 
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
@@ -290,13 +293,20 @@ public class ANDao {
 		int state = -1;
 
 		try {
-			connection = dataSource.getConnection(); //md_title, 빠짐 DTO에 컬럼 빠짐
+			connection = dataSource.getConnection(); // md_title, 빠짐 DTO에 컬럼 빠짐
 			String sql = "insert into tblmerchandise(md_name, md_photo_url,  md_category, md_price, md_rental_term, "
+<<<<<<< HEAD
 					+ "md_deposit, md_detail_content, member_id, md_serial_number) " //md_title + "', '"
 					+ "values('" + md_name + "', '" + md_photo_url + "', '"   
 								+ md_category + "', '" + md_price + "', '" + md_rental_term
 								+ "', '" + md_deposit +"', '" + md_detail_content + "','" + member_id + "', seq_md_serial.nextval)";
 			
+=======
+					+ "md_deposit, md_detail_content) " // md_title + "', '"
+					+ "values('" + md_name + "', '" + md_photo_url + "', '" + md_category + "', '" + md_price + "', '"
+					+ md_rental_term + "', '" + md_deposit + "', '" + md_detail_content + "' )";
+
+>>>>>>> 1e65e2c1b4870405cb4f60f52b982ec3dad2cfd3
 			prepareStatement = connection.prepareStatement(sql);
 			state = prepareStatement.executeUpdate();
 
@@ -328,8 +338,6 @@ public class ANDao {
 		return state;
 	}
 
-	
-	
 	// 전체 상품정보 가져오기
 	public ArrayList<MdDto> anMainSelect() {
 
@@ -359,11 +367,10 @@ public class ANDao {
 				String md_rent_status = resultSet.getString("md_rent_status");
 				String md_hits = resultSet.getString("md_hits");
 
-				 
-				mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term,
-						md_deposit, md_detail_content, md_photo_url, member_id,  md_fav_count, 
-						md_registration_date, md_serial_number, md_rent_status, md_hits));
-				 
+				mdDtos.add(new MdDto(md_name, md_category, md_price, md_rental_term, md_deposit, md_detail_content,
+						md_photo_url, member_id, md_fav_count, md_registration_date, md_serial_number, md_rent_status,
+						md_hits));
+
 			}
 			System.out.println("mdDtos size : " + mdDtos.size());
 
@@ -437,7 +444,132 @@ public class ANDao {
 		return memberDtos;
 	}// anMember()
 
+	// 핸드폰 번호로 아이디 찾기
+	public String anSearchId(String member_tel) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
 
+		String id = "";
+
+		try {
+			connection = dataSource.getConnection(); // md_title, 빠짐 DTO에 컬럼 빠짐
+			String sql = "select member_id " + " from tblmember" + " where member_tel = '" + member_tel + "' ";
+
+			prepareStatement = connection.prepareStatement(sql);
+			resultSet = prepareStatement.executeQuery();
+
+			if (resultSet.next()) {
+				System.out.println("아이디 있음");
+				id = resultSet.getString("member_id");
+			} else {
+				System.out.println("아이디 없음");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		return id;
+	} // anSearchId()
+
+	public void sendEmail(String member_id, String member_name, HttpSession session) {
+		HtmlEmail mail = new HtmlEmail();
+		mail.setHostName("smtp.naver.com");
+		mail.setCharset("utf-8");
+		mail.setDebug(true);
+		
+		mail.setAuthentication("tjdms5322", "rla2684!");
+		mail.setSSLOnConnect(true);
+		
+		try {
+			mail.setFrom("tjdms5322@naver.com", "한울관리자");
+			mail.addTo(member_id, member_name);
+			
+			mail.setSubject("[대여 안대여] 비밀번호 재설정 안내 메일");
+			StringBuffer msg = new StringBuffer();
+			msg.append("<html>");
+			msg.append("<body>");
+			msg.append("<hr>");
+			msg.append("<h1>비밀번호 재설정 안내</h1>");
+			msg.append("<p>아래 링크를 누르시고 새로운 비밀번호를 입력하시면 비밀번호가 변경됩니다.</p>");
+			msg.append("<a href='192.178.0.178:8080/app/anResetPwView?member_id=" + member_id + "'>비밀번호 재설정 하기</a>");
+			// 안드로이드에서는 localhost로 접근이 x, 서버를 돌리고 있는 ip주소를 입력해야 접근이 가능함
+			
+			msg.append("</body>");	
+			msg.append("</html>");
+			mail.setHtmlMsg(msg.toString());
+			/*
+			EmailAttachment file = new EmailAttachment();
+			file.setPath(session.getServletContext().getRealPath("resources") + "/images/hanul.logo.png");
+			mail.attach(file);
+			*/
+			mail.send();
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	} //sendEmail()
+	
+	//비밀번호 재설정
+	public int anResetPw(String id, String pw) {
+		Connection connection = null;
+		PreparedStatement prepareStatement = null;
+		ResultSet resultSet = null;
+		int succ = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			String sql = "update tblmember set member_pw = '" + pw + "' where member_id = '" + id + "'";
+			prepareStatement = connection.prepareStatement(sql);
+			succ = prepareStatement.executeUpdate();
+
+			if (succ > 0) {
+				System.out.println("비밀번호 재설정 완료!");
+			} else {
+				System.out.println("비밀번호 재설정 실패!");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (prepareStatement != null) {
+					prepareStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+			}
+		}
+		
+		return succ;
+	} //anResetPw()
+	
 
 	/*
 	 * public ArrayList<ANDto> anSelectMulti() {
